@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: GPL-2.0-only
+config APFS_FS
+	tristate "Apple File System support"
+	select LIBCRC32C
+	select ZLIB_INFLATE
+	select NLS
+	select BUFFER_HEAD
+	select FS_IOMAP
+	select LEGACY_DIRECT_IO
+	help
+	  Is a proprietary file system developed and deployed by Apple Inc.
+	  Linux kernel module supported by linux-apfs on GitHub.
+
+	  In Minimal System used for better support with Apple devices
+	  like iDevices or MacDevices. Driver by default is in read-only mode.
+	  In Linux you can use apfsprogs for work with APFS containers
+	  but recommend to use official utilities from macOS (Recovery).
+	  
+config APFS_RW_ALWAYS
+	bool "Always mount in read-write"
+	depends on APFS_FS
+	help
+	  Always mount APFS containers and volumes in RW mode.
+	  If you make use of the write support, there is a real risk of data corruption
+	  Therefore, choose wisely.
